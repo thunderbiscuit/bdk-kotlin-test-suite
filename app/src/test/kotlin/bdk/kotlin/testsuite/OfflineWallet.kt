@@ -55,15 +55,6 @@ class OfflineWallet {
     @Test
     fun `Online wallet in memory`() {
         val database = DatabaseConfig.Memory
-        val blockchain = BlockchainConfig.Electrum(
-            ElectrumConfig(
-                "ssl://electrum.blockstream.info:60002",
-                null,
-                5u,
-                null,
-                100u
-            )
-        )
         val wallet = Wallet(descriptor, null, Network.TESTNET, database)
         Assert.assertNotNull(wallet)
         val network = wallet.getNetwork()

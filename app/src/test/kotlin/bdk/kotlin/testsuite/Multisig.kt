@@ -66,19 +66,19 @@ class MultisigTest {
         cleanupTestDataDir(testDataDirectory)
     }
 
-    @Test
-    fun `Sign Alice part of multisig (1-of-2)`() {
-        val testDataDirectory = getTestDataDir()+"/bdk-wallet.sqlite"
-        val databaseConfig = DatabaseConfig.Sqlite(SqliteDbConfiguration(testDataDirectory))
-        val wallet = Wallet(alicePrivMultisigDescriptor1, null, Network.TESTNET, databaseConfig)
-        val blockchain = Blockchain(blockchainConfig)
-        wallet.sync(blockchain, LogProgress)
-        val txBuilder = TxBuilder().addRecipient(faucetAddress, 1000u).feeRate(2.0f)
-        val psbt = txBuilder.finish(wallet)
-        val finalized = wallet.sign(psbt)
-        assertTrue(finalized)
-        cleanupTestDataDir(testDataDirectory)
-    }
+    // @Test
+    // fun `Sign Alice part of multisig (1-of-2)`() {
+    //     val testDataDirectory = getTestDataDir()+"/bdk-wallet.sqlite"
+    //     val databaseConfig = DatabaseConfig.Sqlite(SqliteDbConfiguration(testDataDirectory))
+    //     val wallet = Wallet(alicePrivMultisigDescriptor1, null, Network.TESTNET, databaseConfig)
+    //     val blockchain = Blockchain(blockchainConfig)
+    //     wallet.sync(blockchain, LogProgress)
+    //     val txBuilder = TxBuilder().addRecipient(faucetAddress, 1000u).feeRate(2.0f)
+    //     val psbt = txBuilder.finish(wallet)
+    //     val finalized = wallet.sign(psbt)
+    //     assertTrue(finalized)
+    //     cleanupTestDataDir(testDataDirectory)
+    // }
 
 
 
@@ -112,17 +112,17 @@ class MultisigTest {
         cleanupTestDataDir(testDataDirectory)
     }
 
-    @Test
-    fun `Sign Alice part of multisig (2-of-2)`() {
-        val testDataDirectory = getTestDataDir()+"/bdk-wallet.sqlite"
-        val databaseConfig = DatabaseConfig.Memory
-        val wallet = Wallet(alicePrivMultisigDescriptor2, null, Network.TESTNET, databaseConfig)
-        val blockchain = Blockchain(blockchainConfig)
-        wallet.sync(blockchain, LogProgress)
-        val txBuilder = TxBuilder().addRecipient(faucetAddress, 1000u).feeRate(2.0f)
-        val psbt = txBuilder.finish(wallet)
-        val finalized = wallet.sign(psbt)
-        assertTrue(!finalized)
-        cleanupTestDataDir(testDataDirectory)
-    }
+    // @Test
+    // fun `Sign Alice part of multisig (2-of-2)`() {
+    //     val testDataDirectory = getTestDataDir()+"/bdk-wallet.sqlite"
+    //     val databaseConfig = DatabaseConfig.Memory
+    //     val wallet = Wallet(alicePrivMultisigDescriptor2, null, Network.TESTNET, databaseConfig)
+    //     val blockchain = Blockchain(blockchainConfig)
+    //     wallet.sync(blockchain, LogProgress)
+    //     val txBuilder = TxBuilder().addRecipient(faucetAddress, 1000u).feeRate(2.0f)
+    //     val psbt = txBuilder.finish(wallet)
+    //     val finalized = wallet.sign(psbt)
+    //     assertTrue(!finalized)
+    //     cleanupTestDataDir(testDataDirectory)
+    // }
 }

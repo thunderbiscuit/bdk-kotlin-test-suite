@@ -11,8 +11,11 @@ repositories {
 }
 
 dependencies {
+    // working with bytes
+    implementation("com.google.guava:guava:31.1-jre")
+
     // bitcoindevkit
-    testImplementation("org.bitcoindevkit:bdk-jvm:0.7.0-SNAPSHOT")
+    testImplementation("org.bitcoindevkit:bdk-jvm:0.8.0-SNAPSHOT")
 
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
     testImplementation(platform("org.junit:junit-bom:5.8.2"))
