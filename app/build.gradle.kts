@@ -12,18 +12,15 @@ repositories {
 
 dependencies {
     // working with bytes
-    implementation("com.google.guava:guava:31.1-jre")
+    testImplementation("com.google.guava:guava:31.1-jre")
 
     // bitcoindevkit
+    // testImplementation("org.bitcoindevkit:bdk-jvm:0.7.0")
     testImplementation("org.bitcoindevkit:bdk-jvm:0.8.0-SNAPSHOT")
 
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
     testImplementation(platform("org.junit:junit-bom:5.8.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-
-    // Kotest
-    // testImplementation("io.kotest:kotest-runner-junit5:5.3.0")
-    // testImplementation("io.kotest:kotest-assertions-core:5.3.0")
 }
 
 tasks.withType<Test> {
@@ -43,11 +40,6 @@ tasks.withType<Test> {
         showStackTraces = true
     }
 }
-
-// Kotest
-// tasks.withType<Test>().configureEach {
-//     useJUnitPlatform()
-// }
 
 testing {
     suites {
