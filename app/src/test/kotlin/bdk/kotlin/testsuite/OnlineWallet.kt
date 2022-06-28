@@ -19,7 +19,7 @@ class OnlineWallet {
     }
 
     // BIP84 descriptor
-    val descriptor = "wpkh([c258d2e4/84h/1h/0h]tpubDDYkZojQFQjht8Tm4jsS3iuEmKjTiEGjG6KnuFNKKJb5A6ZUCUZKdvLdSDWofKi4ToRCwb9poe1XdqfUnP4jaJjCB2Zwv11ZLgSbnZSNecE/0/*)"
+    // private val descriptor = "wpkh([c258d2e4/84h/1h/0h]tpubDDYkZojQFQjht8Tm4jsS3iuEmKjTiEGjG6KnuFNKKJb5A6ZUCUZKdvLdSDWofKi4ToRCwb9poe1XdqfUnP4jaJjCB2Zwv11ZLgSbnZSNecE/0/*)"
 
     private val memoryDatabaseConfig = DatabaseConfig.Memory
 
@@ -29,48 +29,48 @@ class OnlineWallet {
             null,
             5u,
             null,
-            100u
+            200u
         )
     )
 
-    @Test
-    fun `Sqlite wallet sync and get balance`() {
-        val testDataDir = getTestDataDir() + "/bdk-wallet.sqlite"
-        val databaseConfig = DatabaseConfig.Sqlite(SqliteDbConfiguration(testDataDir))
-        val wallet = Wallet(descriptor, null, Network.TESTNET, databaseConfig)
-        val blockchain = Blockchain(blockchainConfig)
-        wallet.sync(blockchain, LogProgress)
-        val balance = wallet.getBalance()
-        Assert.assertTrue(balance > 0u)
-        cleanupTestDataDir(testDataDir)
-    }
+    // @Test
+    // fun `Sqlite wallet sync and get balance`() {
+    //     val testDataDir = getTestDataDir() + "/bdk-wallet.sqlite"
+    //     val databaseConfig = DatabaseConfig.Sqlite(SqliteDbConfiguration(testDataDir))
+    //     val wallet = Wallet(descriptor, null, Network.TESTNET, databaseConfig)
+    //     val blockchain = Blockchain(blockchainConfig)
+    //     wallet.sync(blockchain, LogProgress)
+    //     val balance = wallet.getBalance()
+    //     Assert.assertTrue(balance > 0u)
+    //     cleanupTestDataDir(testDataDir)
+    // }
 
-    @Test
-    fun `Online wallet in memory`() {
-        val database = DatabaseConfig.Memory
-        val blockchain = BlockchainConfig.Electrum(
-            ElectrumConfig(
-                "ssl://electrum.blockstream.info:60002",
-                null,
-                5u,
-                null,
-                100u
-            )
-        )
-        val wallet = Wallet(descriptor, null, Network.TESTNET, database)
-        Assert.assertNotNull(wallet)
-        val network = wallet.getNetwork()
-        Assert.assertEquals(network, Network.TESTNET)
-    }
+    // @Test
+    // fun `Online wallet in memory`() {
+    //     val database = DatabaseConfig.Memory
+    //     val blockchain = BlockchainConfig.Electrum(
+    //         ElectrumConfig(
+    //             "ssl://electrum.blockstream.info:60002",
+    //             null,
+    //             5u,
+    //             null,
+    //             100u
+    //         )
+    //     )
+    //     val wallet = Wallet(descriptor, null, Network.TESTNET, database)
+    //     Assert.assertNotNull(wallet)
+    //     val network = wallet.getNetwork()
+    //     Assert.assertEquals(network, Network.TESTNET)
+    // }
 
-    @Test
-    fun `Online wallet sync and get balance`() {
-        val wallet = Wallet(descriptor, null, Network.TESTNET, memoryDatabaseConfig)
-        val blockchain = Blockchain(blockchainConfig)
-        wallet.sync(blockchain, LogProgress)
-        val balance = wallet.getBalance()
-        Assert.assertTrue(balance > 0u)
-    }
+    // @Test
+    // fun `Online wallet sync and get balance`() {
+    //     val wallet = Wallet(descriptor, null, Network.TESTNET, memoryDatabaseConfig)
+    //     val blockchain = Blockchain(blockchainConfig)
+    //     wallet.sync(blockchain, LogProgress)
+    //     val balance = wallet.getBalance()
+    //     Assert.assertTrue(balance > 0u)
+    // }
 
     @Test
     fun `Valid psbt serde`() {
@@ -83,27 +83,29 @@ class OnlineWallet {
 
     // @Test
     // fun `Transaction builder broadcast`() {
-    //    val descriptor =
-    //        "wpkh([c1ed86ca/84'/1'/0'/0]tprv8hTkxK6QT7fCQx1wbuHuwbNh4STr2Ruz8RwEX7ymk6qnpixtbRG4T99mHxJwKTHPuKQ61heWrrpxZ8jpHj4sbisrQhDxnyx3HoQEZebtraN/*)"
-    //    val wallet = Wallet(descriptor, null, Network.TESTNET, memoryDatabaseConfig)
-    //    val blockchain = Blockchain(blockchainConfig);
-    //    wallet.sync(blockchain, LogProgress())
-    //    val balance = wallet.getBalance()
-    //    if (balance > 2000u) {
-    //        println("balance $balance")
-    //        // send coins back to https://bitcoinfaucet.uo1.net
-    //        val faucetAddress = "tb1ql7w62elx9ucw4pj5lgw4l028hmuw80sndtntxt"
-    //        val txBuilder = TxBuilder().addRecipient(faucetAddress, 1000u).feeRate(1.2f)
-    //        val psbt = txBuilder.finish(wallet)
-    //        wallet.sign(psbt)
-    //        blockchain.broadcast(psbt)
-    //        val txid = psbt.txid()
-    //        println("https://mempool.space/testnet/tx/$txid")
-    //        assertNotNull("txid was null", txid)
-    //    } else {
-    //        val depositAddress = wallet.getAddress(AddressIndex.LAST_UNUSED)
-    //        fail("Send more testnet coins to: $depositAddress")
-    //    }
+    //     val descriptor = "wpkh([c1ed86ca/84'/1'/0'/0]tprv8hTkxK6QT7fCQx1wbuHuwbNh4STr2Ruz8RwEX7ymk6qnpixtbRG4T99mHxJwKTHPuKQ61heWrrpxZ8jpHj4sbisrQhDxnyx3HoQEZebtraN/*)"
+    //     val wallet = Wallet(descriptor, null, Network.TESTNET, memoryDatabaseConfig)
+    //     val blockchain = Blockchain(blockchainConfig);
+    //     wallet.sync(blockchain, LogProgress)
+    //     val balance = wallet.getBalance()
+    //
+    //     if (balance > 2000u) {
+    //         println("balance $balance")
+    //         // send coins back to https://bitcoinfaucet.uo1.net
+    //         val faucetAddress = "tb1ql7w62elx9ucw4pj5lgw4l028hmuw80sndtntxt"
+    //         // val txBuilder = TxBuilder().addRecipient(faucetAddress, 1000u).feeRate(1.2f)
+    //         val psbt = TxBuilder().addRecipient(faucetAddress, 1000u).feeRate(1.2f).finish(wallet)
+    //         val signatureWorked: Boolean = wallet.sign(psbt)
+    //         println("Signature worked: $signatureWorked")
+    //         blockchain.broadcast(psbt)
+    //         val txid = psbt.txid()
+    //         println("https://mempool.space/testnet/tx/$txid")
+    //         assertNotNull("txid was null", txid)
+    //     } else {
+    //         println("Balance: $balance")
+    //         val depositAddress = wallet.getAddress(AddressIndex.LAST_UNUSED).address
+    //         fail("Not enough coins to perform the test. Send more testnet coins to: $depositAddress")
+    //     }
     // }
 
     @Test(expected = BdkException.Generic::class)

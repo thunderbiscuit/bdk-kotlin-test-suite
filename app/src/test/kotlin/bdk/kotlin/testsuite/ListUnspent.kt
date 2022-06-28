@@ -29,17 +29,17 @@ class ListUnspent {
         )
     )
 
-    @Test
-    fun `Sqlite wallet list unspent UTXOs`() {
-        val testDataDir = getTestDataDir() + "/bdk-wallet.sqlite"
-        val databaseConfig = DatabaseConfig.Sqlite(SqliteDbConfiguration(testDataDir))
-        val wallet = Wallet(descriptor, null, Network.TESTNET, databaseConfig)
-        val blockchain = Blockchain(blockchainConfig)
-        wallet.sync(blockchain, LogProgress)
-
-        val unspentUtxos: List<LocalUtxo> = wallet.listUnspent()
-        println(unspentUtxos.first())
-        Assert.assertTrue(unspentUtxos.isNotEmpty())
-        cleanupTestDataDir(testDataDir)
-    }
+    // @Test
+    // fun `Sqlite wallet list unspent UTXOs`() {
+    //     val testDataDir = getTestDataDir() + "/bdk-wallet.sqlite"
+    //     val databaseConfig = DatabaseConfig.Sqlite(SqliteDbConfiguration(testDataDir))
+    //     val wallet = Wallet(descriptor, null, Network.TESTNET, databaseConfig)
+    //     val blockchain = Blockchain(blockchainConfig)
+    //     wallet.sync(blockchain, LogProgress)
+    //
+    //     val unspentUtxos: List<LocalUtxo> = wallet.listUnspent()
+    //     println(unspentUtxos.first())
+    //     Assert.assertTrue(unspentUtxos.isNotEmpty())
+    //     cleanupTestDataDir(testDataDir)
+    // }
 }
