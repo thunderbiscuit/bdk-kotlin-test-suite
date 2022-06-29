@@ -1,11 +1,12 @@
 package bdk.kotlin.testsuite
 
 import org.bitcoindevkit.*
-import org.junit.Assert
-import org.junit.Test
 import java.io.File
 import java.nio.file.Files
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
+import kotlin.test.Test
 
 class MultisigTest {
 
@@ -49,8 +50,8 @@ class MultisigTest {
         val databaseConfig = DatabaseConfig.Memory
         val wallet = Wallet(aliceBobMultisigPublicDescriptor1, null, Network.TESTNET, databaseConfig)
         val address = wallet.getAddress(AddressIndex.LAST_UNUSED).address
-        Assert.assertNotNull(address)
-        Assert.assertEquals("tb1qq04ys0gztd8ks2xan4nu8sjtk2fselp4337gn7gjswkqus4h8ekqduv4s3", address)
+        assertNotNull(address)
+        assertEquals("tb1qq04ys0gztd8ks2xan4nu8sjtk2fselp4337gn7gjswkqus4h8ekqduv4s3", address)
         cleanupTestDataDir(testDataDirectory)
     }
 
@@ -95,8 +96,8 @@ class MultisigTest {
         val databaseConfig = DatabaseConfig.Memory
         val wallet = Wallet(aliceBobMultisigPublicDescriptor2, null, Network.TESTNET, databaseConfig)
         val address = wallet.getAddress(AddressIndex.LAST_UNUSED).address
-        Assert.assertNotNull(address)
-        Assert.assertEquals("tb1qhwq4ujsghdsrx5q0xezx42r7939v6emd33slce704q0xxvhwlygsyz40wc", address)
+        assertNotNull(address)
+        assertEquals("tb1qhwq4ujsghdsrx5q0xezx42r7939v6emd33slce704q0xxvhwlygsyz40wc", address)
         cleanupTestDataDir(testDataDirectory)
     }
 

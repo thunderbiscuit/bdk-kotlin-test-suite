@@ -1,10 +1,10 @@
 package bdk.kotlin.testsuite
 
 import org.bitcoindevkit.*
-import org.junit.Assert
-import org.junit.Test
+import kotlin.test.Test
 import java.io.File
 import java.nio.file.Files
+import kotlin.test.assertTrue
 
 class ListUnspent {
 
@@ -39,7 +39,7 @@ class ListUnspent {
     //
     //     val unspentUtxos: List<LocalUtxo> = wallet.listUnspent()
     //     println(unspentUtxos.first())
-    //     Assert.assertTrue(unspentUtxos.isNotEmpty())
+    //     assertTrue(unspentUtxos.isNotEmpty())
     //     cleanupTestDataDir(testDataDir)
     // }
 }

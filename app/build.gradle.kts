@@ -18,9 +18,12 @@ dependencies {
     testImplementation("org.bitcoindevkit:bdk-jvm:0.7.1")
     // testImplementation("org.bitcoindevkit:bdk-jvm:0.8.0-SNAPSHOT")
 
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
-    testImplementation(platform("org.junit:junit-bom:5.8.2"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    // Use the Kotlin test library.
+    testImplementation(kotlin("test"))
+
+    // testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
+    // testImplementation(platform("org.junit:junit-bom:5.8.2"))
+    // testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
 tasks.withType<Test> {
@@ -38,13 +41,5 @@ tasks.withType<Test> {
         showExceptions = true
         showCauses = true
         showStackTraces = true
-    }
-}
-
-testing {
-    suites {
-        val test by getting(JvmTestSuite::class) {
-            useKotlinTest()
-        }
     }
 }

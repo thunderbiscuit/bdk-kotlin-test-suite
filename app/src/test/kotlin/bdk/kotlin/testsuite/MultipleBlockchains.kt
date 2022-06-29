@@ -1,7 +1,7 @@
 package bdk.kotlin.testsuite
 
 import org.bitcoindevkit.*
-import org.junit.Test
+import kotlin.test.Test
 import java.nio.file.Files
 
 class MultipleBlockchains {
