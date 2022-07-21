@@ -17,3 +17,4 @@ I currently have classes tinkering with:
 - [x] OP_RETURN
 - [x] Partial signatures of PSBTs and multisig
 - [x] List unspent UTXOs
+- [x] Coin selection methods

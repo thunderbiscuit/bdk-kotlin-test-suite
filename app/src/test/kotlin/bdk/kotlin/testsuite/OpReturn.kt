@@ -24,16 +24,16 @@ class OpReturn {
         )
     )
 
-    // @OptIn(ExperimentalUnsignedTypes::class)
-    // @Test
-    // fun `Build UByte list`() {
-    //     // Working with friends is a happy way to live.
-    //     val message: ByteArray =
-    //         "576f726b696e67207769746820667269656e647320697320612068617070792077617920746f206c6976652e".toByteArray()
-    //     println(message)
-    //     val messageAsUByteList: List<UByte> = message.asUByteArray().asList()
-    //     println(messageAsUByteList)
-    // }
+    @OptIn(ExperimentalUnsignedTypes::class)
+    @Test
+    fun `Build UByte list`() {
+        // Working with friends is a happy way to live.
+        val message: ByteArray =
+            "576f726b696e67207769746820667269656e647320697320612068617070792077617920746f206c6976652e".toByteArray()
+        println(message)
+        val messageAsUByteList: List<UByte> = message.asUByteArray().asList()
+        println(messageAsUByteList)
+    }
 
     // @OptIn(ExperimentalUnsignedTypes::class)
     // @Test

@@ -15,8 +15,7 @@ dependencies {
     testImplementation("com.google.guava:guava:31.1-jre")
 
     // bitcoindevkit
-    testImplementation("org.bitcoindevkit:bdk-jvm:0.7.1")
-    // testImplementation("org.bitcoindevkit:bdk-jvm:0.8.0-SNAPSHOT")
+    testImplementation("org.bitcoindevkit:bdk-jvm:0.8.0-SNAPSHOT")
 
     // Use the Kotlin test library.
     testImplementation(kotlin("test"))
