@@ -15,14 +15,10 @@ dependencies {
     testImplementation("com.google.guava:guava:31.1-jre")
 
     // bitcoindevkit
-    testImplementation("org.bitcoindevkit:bdk-jvm:0.8.0-SNAPSHOT")
+    testImplementation("org.bitcoindevkit:bdk-jvm:0.10.0-SNAPSHOT")
 
-    // Use the Kotlin test library.
+    // Use the Kotlin test library
     testImplementation(kotlin("test"))
-
-    // testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
-    // testImplementation(platform("org.junit:junit-bom:5.8.2"))
-    // testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
 tasks.withType<Test> {

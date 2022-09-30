@@ -79,11 +79,16 @@ class OfflineWallet {
     }
 
     @Test
+    fun simple() {
+        val mydesc: DescriptorSecretKey = DescriptorSecretKey(Network.TESTNET, mnemonic = "a", password = null)
+        // val mnemonic: String = generateMnemonic(wordCount = WordCount.WORDS12)
+    }
+    @Test
     fun `Online wallet in memory`() {
         val database = DatabaseConfig.Memory
         val wallet = Wallet(descriptor, null, Network.TESTNET, database)
         assertNotNull(wallet)
-        val network = wallet.getNetwork()
+        val network = wallet.network()
         assertEquals(network, Network.TESTNET)
     }
 }

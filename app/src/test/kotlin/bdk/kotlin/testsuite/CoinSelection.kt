@@ -6,13 +6,6 @@ import java.nio.file.Files
 import kotlin.test.*
 
 class CoinSelection {
-    private fun getTestDataDir(): String {
-        return Files.createTempDirectory("bdk-test").toString()
-    }
-
-    private fun cleanupTestDataDir(testDataDir: String) {
-        File(testDataDir).deleteRecursively()
-    }
 
     // BIP84 descriptor
     private val descriptor = "wpkh([c258d2e4/84h/1h/0h]tpubDDYkZojQFQjht8Tm4jsS3iuEmKjTiEGjG6KnuFNKKJb5A6ZUCUZKdvLdSDWofKi4ToRCwb9poe1XdqfUnP4jaJjCB2Zwv11ZLgSbnZSNecE/0/*)"
@@ -40,7 +33,7 @@ class CoinSelection {
         val blockchain = Blockchain(blockchainConfig)
         wallet.sync(blockchain, LogProgress)
         val balance = wallet.getBalance()
-        assertTrue(balance > 0u)
+        assertTrue(balance.total > 0u)
         cleanupTestDataDir(testDataDir)
     }
 
@@ -50,7 +43,7 @@ class CoinSelection {
         val blockchain = Blockchain(blockchainConfig)
         wallet.sync(blockchain, LogProgress)
         val balance = wallet.getBalance()
-        assertTrue(balance > 0u)
+        assertTrue(balance.total > 0u)
     }
 
     @Test
@@ -58,7 +51,7 @@ class CoinSelection {
         assertFailsWith(exceptionClass = BdkException.Generic::class) {
             val descriptor = "wpkh([c1ed86ca/84'/1'/0'/0]tprv8hTkxK6QT7fCQx1wbuHuwbNh4STr2Ruz8RwEX7ymk6qnpixtbRG4T99mHxJwKTHPuKQ61heWrrpxZ8jpHj4sbisrQhDxnyx3HoQEZebtraN/*)"
             val wallet = Wallet(descriptor, null, Network.TESTNET, memoryDatabaseConfig)
-            val txBuilder = TxBuilder().addRecipient("INVALID_ADDRESS", 1000u).feeRate(1.2f)
+            val txBuilder = TxBuilder().addRecipient(Address("INVALID_ADDRESS").scriptPubkey(), 1000u).feeRate(1.2f)
             txBuilder.finish(wallet)
         }
     }
@@ -72,11 +65,11 @@ class CoinSelection {
             wallet.sync(blockchain, LogProgress)
             val balance = wallet.getBalance()
 
-            if (balance > 2000u) {
+            if (balance.total > 2000u) {
                 println("balance $balance")
                 val faucetAddress = "tb1ql7w62elx9ucw4pj5lgw4l028hmuw80sndtntxt"
                 val psbt: PartiallySignedBitcoinTransaction = TxBuilder()
-                    .addRecipient(faucetAddress, 1000u)
+                    .addRecipient(Address(faucetAddress).scriptPubkey(), 1000u)
                     .feeRate(1.2f)
                     .doNotSpendChange()
                     .finish(wallet)
@@ -103,11 +96,11 @@ class CoinSelection {
             wallet.sync(blockchain, LogProgress)
             val balance = wallet.getBalance()
 
-            if (balance > 2000u) {
+            if (balance.total > 2000u) {
                 println("balance $balance")
                 val faucetAddress = "tb1ql7w62elx9ucw4pj5lgw4l028hmuw80sndtntxt"
                 val psbt: PartiallySignedBitcoinTransaction = TxBuilder()
-                    .addRecipient(faucetAddress, 1000u)
+                    .addRecipient(Address(faucetAddress).scriptPubkey(), 1000u)
                     .feeRate(1.2f)
                     .onlySpendChange()
                     .finish(wallet)
@@ -134,11 +127,11 @@ class CoinSelection {
             wallet.sync(blockchain, LogProgress)
             val balance = wallet.getBalance()
 
-            if (balance > 2000u) {
+            if (balance.total > 2000u) {
                 println("balance $balance")
                 val faucetAddress = "tb1ql7w62elx9ucw4pj5lgw4l028hmuw80sndtntxt"
                 val psbt: PartiallySignedBitcoinTransaction = TxBuilder()
-                    .addRecipient(faucetAddress, 1000u)
+                    .addRecipient(Address(faucetAddress).scriptPubkey(), 1000u)
                     .feeRate(1.2f)
                     .doNotSpendChange()
                     .finish(wallet)
@@ -163,11 +156,11 @@ class CoinSelection {
         wallet.sync(blockchain, LogProgress)
         val balance = wallet.getBalance()
 
-        if (balance > 2000u) {
+        if (balance.total > 2000u) {
             println("balance $balance")
             val faucetAddress = "tb1ql7w62elx9ucw4pj5lgw4l028hmuw80sndtntxt"
             val psbt: PartiallySignedBitcoinTransaction = TxBuilder()
-                .addRecipient(faucetAddress, 1000u)
+                .addRecipient(Address(faucetAddress).scriptPubkey(), 1000u)
                 .feeAbsolute(900uL)
                 .finish(wallet)
             val signatureWorked: Boolean = wallet.sign(psbt)
@@ -192,11 +185,11 @@ class CoinSelection {
             wallet.sync(blockchain, LogProgress)
             val balance = wallet.getBalance()
 
-            if (balance > 2000u) {
+            if (balance.total > 2000u) {
                 println("balance $balance")
                 val faucetAddress = "tb1ql7w62elx9ucw4pj5lgw4l028hmuw80sndtntxt"
                 val psbt: PartiallySignedBitcoinTransaction = TxBuilder()
-                    .addRecipient(faucetAddress, 1000u)
+                    .addRecipient(Address(faucetAddress).scriptPubkey(), 1000u)
                     .manuallySelectedOnly()
                     .finish(wallet)
                 val signatureWorked: Boolean = wallet.sign(psbt)
